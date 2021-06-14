@@ -1,20 +1,41 @@
 import React, { useState } from "react";
 
-function QuestionForm(props) {
-  const [formData, setFormData] = useState({
-    prompt: "",
-    answer1: "",
-    answer2: "",
-    answer3: "",
-    answer4: "",
-    correctIndex: 0,
-  });
+function QuestionForm({formData, setFormData, id}) {
+  // const [formData, setFormData] = useState({
+  //   prompt: "",
+  //   answer1: "",
+  //   answer2: "",
+  //   answer3: "",
+  //   answer4: "",
+  //   correctIndex: 0,
+  // });
 
+  function handleAnswerChange(event){
+    
+      fetch(`http://localhost:4000/questions/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          correctIndex: event.target.value
+        })
+      })
+      
+    
+  }
+  
   function handleChange(event) {
+
+    
+
+    
+
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
+
   }
 
   function handleSubmit(event) {
@@ -84,7 +105,7 @@ function QuestionForm(props) {
           <select
             name="correctIndex"
             value={formData.correctIndex}
-            onChange={handleChange}
+            onChange={handleAnswerChange}
           >
             <option value="0">{formData.answer1}</option>
             <option value="1">{formData.answer2}</option>

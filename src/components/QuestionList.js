@@ -3,7 +3,7 @@ import QuestionForm from "./QuestionForm";
 
 
 
-function QuestionList({questionData, setData, setPage}) {
+function QuestionList({questionData, setData, setPage, displayForm}) {
   
 
   useEffect(() => {
@@ -24,16 +24,12 @@ function QuestionList({questionData, setData, setPage}) {
     })
   }
 
-  function displayQuestionForm(e){
-    setPage("Form")
-    console.log(e)
-    // return <QuestionForm data={}/>
-  }
+ 
 
   let displayData = questionData.map(obj => {
     return (
       <>
-        <li>{obj.prompt} <button id={obj.id} onClick={handleDelete}>Delete Question</button><button onClick={displayQuestionForm}>Question Form</button></li>
+        <li>{obj.prompt} <button id={obj.id} onClick={handleDelete}>Delete Question</button><button id={obj.id} onClick={displayForm}>Question Form</button></li>
       
       </>
     )
